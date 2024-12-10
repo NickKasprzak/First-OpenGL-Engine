@@ -1,0 +1,13 @@
+C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\ApplicationContext.cpp;C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\x64\Debug\ApplicationContext.obj
+C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\Camera.cpp;C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\x64\Debug\Camera.obj
+C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\external\include\glad\glad.c;C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\x64\Debug\glad.obj
+C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\external\include\stb\stb_image.cpp;C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\x64\Debug\stb_image.obj
+C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\main.cpp;C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\x64\Debug\main.obj
+C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\Mesh.cpp;C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\x64\Debug\Mesh.obj
+C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\MeshLoader.cpp;C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\x64\Debug\MeshLoader.obj
+C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\SceneNode.cpp;C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\x64\Debug\SceneNode.obj
+C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\Shader.cpp;C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\x64\Debug\Shader.obj
+C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\Texture.cpp;C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\x64\Debug\Texture.obj
+C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\TextureLoader.cpp;C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\x64\Debug\TextureLoader.obj
+C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\Time.cpp;C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\x64\Debug\Time.obj
+C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\Window.cpp;C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\x64\Debug\Window.obj

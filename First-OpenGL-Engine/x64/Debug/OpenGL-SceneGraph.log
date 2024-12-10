@@ -1,0 +1,38 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (First-Rendering-Engine.vcxproj, OpenGL-SceneGraph.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  ApplicationContext.cpp
+C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\Time.h(12,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'ApplicationContext.cpp')
+  
+  Camera.cpp
+C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\Time.h(12,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Camera.cpp')
+  
+C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\Camera.cpp(7,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\Camera.cpp(8,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\Camera.cpp(12,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\Camera.cpp(13,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\Camera.cpp(14,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\Camera.cpp(15,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  stb_image.cpp
+  main.cpp
+C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\Time.h(12,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'main.cpp')
+  
+  Mesh.cpp
+C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\Mesh.cpp(88,47): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+  MeshLoader.cpp
+  SceneNode.cpp
+  Shader.cpp
+  Texture.cpp
+  TextureLoader.cpp
+  Time.cpp
+C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\Time.h(12,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Time.cpp')
+  
+  Window.cpp
+C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\OpenGL-SceneGraph\Time.h(12,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Window.cpp')
+  
+  Generating Code...
+  glad.c
+  OpenGL-SceneGraph.vcxproj -> C:\Users\AquaB\Documents\Projects\OpenGL-SceneGraph\x64\Debug\First-OpenGL-Engine.exe

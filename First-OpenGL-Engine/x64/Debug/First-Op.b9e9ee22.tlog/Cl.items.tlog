@@ -1,0 +1,13 @@
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\ApplicationContext.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\ApplicationContext.obj
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Camera.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\Camera.obj
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\external\include\glad\glad.c;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\glad.obj
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\external\include\stb\stb_image.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\stb_image.obj
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\main.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\main.obj
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Mesh.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\Mesh.obj
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\MeshLoader.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\MeshLoader.obj
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\SceneNode.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\SceneNode.obj
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Shader.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\Shader.obj
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Texture.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\Texture.obj
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\TextureLoader.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\TextureLoader.obj
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Time.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\Time.obj
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Window.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\Window.obj
