@@ -2,9 +2,13 @@ C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Applic
 C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Camera.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\Camera.obj
 C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\external\include\glad\glad.c;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\glad.obj
 C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\external\include\stb\stb_image.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\stb_image.obj
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\GBuffer.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\GBuffer.obj
 C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\main.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\main.obj
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Material.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\Material.obj
 C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Mesh.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\Mesh.obj
 C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\MeshLoader.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\MeshLoader.obj
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\RenderDrawBuffer.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\RenderDrawBuffer.obj
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\Renderer.obj
 C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\SceneNode.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\SceneNode.obj
 C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Shader.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\Shader.obj
 C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Texture.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\Texture.obj

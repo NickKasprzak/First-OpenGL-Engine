@@ -1,11 +1,5 @@
 #include "SceneNode.h"
 
-void SceneNode::Draw(Shader* shader)
-{
-	shader->SetMat4Uniform("model", _modelMatrix);
-	_mesh->Draw(shader);
-}
-
 void SceneNode::SetPosition(glm::vec3 position)
 {
 	_position = position;
@@ -27,6 +21,11 @@ void SceneNode::SetRotation(glm::vec3 rotation)
 void SceneNode::SetMesh(Mesh* mesh)
 {
 	_mesh = mesh;
+}
+
+void SceneNode::SetMaterial(Material* material)
+{
+	_material = material;
 }
 
 void SceneNode::UpdateModelMatrix()

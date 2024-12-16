@@ -18,6 +18,10 @@
     <ClCompile Include="external\include\stb\stb_image.cpp">
       <Filter>external</Filter>
     </ClCompile>
+    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="RenderDrawBuffer.cpp" />
+    <ClCompile Include="Material.cpp" />
+    <ClCompile Include="GBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ApplicationContext.h" />
@@ -32,10 +36,16 @@
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Window.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="RenderDrawBuffer.h" />
+    <ClInclude Include="RenderContext.h" />
+    <ClInclude Include="Material.h" />
+    <ClInclude Include="Uniform.h" />
+    <ClInclude Include="GBuffer.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="basicShader.frag" />
-    <None Include="basicShader.vert" />
+    <None Include="geometryPass.frag" />
+    <None Include="geometryPass.vert" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="external">

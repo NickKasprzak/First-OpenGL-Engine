@@ -9,6 +9,8 @@
 #include "TextureLoader.h"
 #include "Primitives.h"
 #include "Shader.h"
+#include "SceneNode.h"
+#include "Camera.h"
 
 ApplicationContext* ApplicationContext::_instance = nullptr;
 
@@ -16,6 +18,7 @@ Camera testCamera;
 Shader testShader;
 Cube testMesh;
 Texture testTexture;
+Material testMaterial;
 std::vector<SceneNode> testRenderables;
 
 ApplicationContext* ApplicationContext::Instance()
@@ -53,19 +56,26 @@ int ApplicationContext::Initialize()
 	testCamera.SetPerspective(45.5f, 800.0f / 600.0f, 0.1f, 100.0f);
 
 	// temp shader
-	testShader.LoadProgram("C:/Users/AquaB/Documents/Projects/First-OpenGL-Engine/First-OpenGL-Engine/basicShader.vert",
-						   "C:/Users/AquaB/Documents/Projects/First-OpenGL-Engine/First-OpenGL-Engine/basicShader.frag");
+	testShader.LoadProgram("C:/Users/AquaB/Documents/Projects/First-OpenGL-Engine/First-OpenGL-Engine/geometryPass.vert",
+						   "C:/Users/AquaB/Documents/Projects/First-OpenGL-Engine/First-OpenGL-Engine/geometryPass.frag");
 
+	// temp obj
 	testMesh.BuildCube();
 
 	TextureLoader textureLoader;
 	testTexture = textureLoader.LoadTextureFromPath("C:/Users/AquaB/Downloads/OldSky.png");
 	testTexture.SetType("diffuseMap");
-	testMesh.AddTexture(testTexture);
+
+	testMaterial.Initialize(&testShader, 0);
+	testMaterial.SetTexture("diffuseMap", &testTexture, 1);
 
 	SceneNode testRenderable;
 	testRenderable.SetMesh(&testMesh);
+	testRenderable.SetMaterial(&testMaterial);
 	testRenderables.push_back(testRenderable);
+
+	_renderer._gBuffer.Initialize(800, 600);
+	_renderer.SetCamera(&testCamera);
 
 	return 1;
 }
@@ -82,16 +92,12 @@ bool ApplicationContext::Update()
 	
 	_window.HandleKeyboardInput();
 
-	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	glEnable(GL_DEPTH_TEST);
-
 	for (int i = 0; i < testRenderables.size(); i++)
 	{
-		_window.DrawToFramebuffer(&(testRenderables[i]), &testShader);
-		testRenderables[i].Draw(&testShader);
+		_renderer.PushRenderDrawCall(0, 0, 0, &testRenderables[i]);
 	}
+	_renderer.ProcessRenderCalls();
+	_renderer.ClearRenderBuffer();
 
 	glfwPollEvents();
 	_window.FlipBuffer();

@@ -1,23 +1,21 @@
 #include "Mesh.h"
 
-void Mesh::BuildMesh(std::vector<Vertex> vertices, std::vector<Texture> textures)
+void Mesh::BuildMesh(std::vector<Vertex> vertices)
 {
 	Dispose();
 
 	_vertices = vertices;
 	_indices = std::vector<unsigned int>();
-	_textures = textures;
 
 	GenerateBuffers();
 }
 
-void Mesh::BuildMesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures)
+void Mesh::BuildMesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices)
 {
 	Dispose();
 
 	_vertices = vertices;
 	_indices = indices;
-	_textures = textures;
 
 	GenerateBuffers();
 }
@@ -49,38 +47,10 @@ void Mesh::Dispose()
 
 	_vertices = std::vector<Vertex>();
 	_indices = std::vector<unsigned int>();
-	_textures = std::vector<Texture>();
 }
 
-void Mesh::Draw(Shader* shader)
+void Mesh::Draw()
 {
-	unsigned int diffMapID = 0;
-	unsigned int specMapID = 0;
-	for (int i = 0; i < _textures.size(); i++)
-	{
-		Texture* tex = &_textures[i];
-		std::string type = tex->GetType();
-		std::string mapName;
-
-		if (type == diffMap)
-		{
-			mapName = (type + std::to_string(diffMapID++));
-		}
-		else if (type == specMap)
-		{
-			mapName = (type + std::to_string(specMapID++));
-		}
-		
-		if (mapName.empty()) { continue; }
-
-		shader->SetIntUniform(mapName, i);
-		tex->Bind(i);
-	}
-	// give shader a number indicating how many textures
-	// of a given map type have been bound for each?
-
-	glActiveTexture(GL_TEXTURE0);
-
 	glBindVertexArray(VAO);
 
 	if (_indices.empty())
@@ -93,11 +63,6 @@ void Mesh::Draw(Shader* shader)
 	}
 
 	glBindVertexArray(0);
-}
-
-void Mesh::AddTexture(Texture texture)
-{
-	_textures.push_back(texture);
 }
 
 void Mesh::GenerateBuffers()

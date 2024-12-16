@@ -13,7 +13,6 @@ public:
 	~Window() = default;
 	int Initialize();
 
-	void DrawToFramebuffer(SceneNode* renderable, Shader* shader);
 	void FlipBuffer();
 
 	void HandleMouseInput(double xPos, double yPos);

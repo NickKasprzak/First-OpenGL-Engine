@@ -19,5 +19,4 @@ public:
 
 	Mesh LoadMeshFromPath(std::string pathName);
 private:
-	Texture LoadTexture();
 };

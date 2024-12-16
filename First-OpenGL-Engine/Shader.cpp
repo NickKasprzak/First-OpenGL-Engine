@@ -1,5 +1,6 @@
 #include "Shader.h"
 
+// put this somewhere else
 bool Shader::LoadProgram(std::string vertexShaderPath, std::string fragmentShaderPath)
 {
 	std::string vertexSourceCode;
@@ -81,12 +82,23 @@ bool Shader::LoadProgram(std::string vertexShaderPath, std::string fragmentShade
 
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
+
+	// load uniform and vertex attributes to the vectors
+
 	return true;
 }
 
 void Shader::Use() const
 {
 	glUseProgram(_shaderProgramID);
+}
+
+bool Shader::HasUniform(std::string name)
+{
+	return true;
+
+	// check uniform vector if a uniform with the given name exists
+	// always returns true for now
 }
 
 void Shader::SetBoolUniform(const std::string& name, bool value) const

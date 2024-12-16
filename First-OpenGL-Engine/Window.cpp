@@ -62,17 +62,6 @@ void Window::HandleMouseInput(double xPos, double yPos)
 	_camera->HandleCursorInput(xPos, yPos);
 }
 
-void Window::DrawToFramebuffer(SceneNode* renderable, Shader* shader)
-{
-	shader->Use();
-	shader->SetMat4Uniform("view", _camera->GetViewMatrix());
-	shader->SetVec3Uniform("viewPos", _camera->GetPosition());
-	shader->SetMat4Uniform("projection", _camera->GetProjectionMatrix());
-
-	// do renderables draw call stuff
-	renderable->Draw(shader);
-}
-
 void Window::FlipBuffer()
 {
 	glfwSwapBuffers(_window);

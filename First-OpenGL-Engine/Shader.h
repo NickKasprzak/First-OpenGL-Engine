@@ -8,6 +8,9 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <vector>
+
+#include "Uniform.h"
 
 class Shader
 {
@@ -17,6 +20,8 @@ public:
 	bool LoadProgram(std::string vertexShaderPath, std::string fragmentShaderPath);
 	void Use() const;
 
+	bool HasUniform(std::string name);
+
 	void SetBoolUniform(const std::string& name, bool value) const;
 	void SetIntUniform(const std::string& name, int value) const;
 	void SetFloatUniform(const std::string& name, float value) const;
@@ -25,4 +30,6 @@ public:
 	void SetVec3Uniform(const std::string& name, glm::vec3 value) const;
 private:
 	unsigned int _shaderProgramID;
+	std::vector<Uniform> _uniforms;
+	//std::vector<VertexAttributes> _attributes;
 };

@@ -3,6 +3,7 @@
 #include <GLFW/glfw3.h>
 
 #include "Window.h"
+#include "Renderer.h"
 
 class ApplicationContext
 {
@@ -17,4 +18,5 @@ public:
 private:
 	static ApplicationContext* _instance;
 	Window _window;
+	Renderer _renderer;
 };
