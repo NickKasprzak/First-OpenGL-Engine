@@ -4,10 +4,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include <string>
-#include <fstream>
-#include <sstream>
 #include <iostream>
+#include <string>
 #include <vector>
 
 #include "Uniform.h"
@@ -16,8 +14,9 @@ class Shader
 {
 public:
 	Shader() = default;
+	~Shader() = default;
 
-	bool LoadProgram(std::string vertexShaderPath, std::string fragmentShaderPath);
+	bool LoadProgram(std::string vertShaderSource, std::string fragShaderSource);
 	void Use() const;
 
 	bool HasUniform(std::string name);
@@ -29,7 +28,7 @@ public:
 	void SetMat3Uniform(const std::string& name, glm::mat3 value) const;
 	void SetVec3Uniform(const std::string& name, glm::vec3 value) const;
 private:
-	unsigned int _shaderProgramID;
-	std::vector<Uniform> _uniforms;
+	unsigned int _shaderProgramID = 0;
+	std::vector<Uniform> _uniforms = std::vector<Uniform>();
 	//std::vector<VertexAttributes> _attributes;
 };

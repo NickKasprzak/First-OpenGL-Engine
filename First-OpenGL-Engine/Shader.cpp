@@ -1,40 +1,13 @@
 #include "Shader.h"
 
 // put this somewhere else
-bool Shader::LoadProgram(std::string vertexShaderPath, std::string fragmentShaderPath)
+bool Shader::LoadProgram(std::string vertShaderSource, std::string fragShaderSource)
 {
-	std::string vertexSourceCode;
-	std::string fragmentSourceCode;
+	// Compile and link shaders from given source
+	const char* vertexSourcePointer = vertShaderSource.c_str();
+	const char* fragmentSourcePointer = fragShaderSource.c_str();
 
-	std::ifstream vertexShaderFile;
-	std::ifstream fragmentShaderFile;
-
-	try
-	{
-		vertexShaderFile.open(vertexShaderPath);
-		fragmentShaderFile.open(fragmentShaderPath);
-
-		std::stringstream vertexStream;
-		std::stringstream fragmentStream;
-
-		vertexStream << vertexShaderFile.rdbuf();
-		fragmentStream << fragmentShaderFile.rdbuf();
-
-		vertexShaderFile.close();
-		fragmentShaderFile.close();
-
-		vertexSourceCode = vertexStream.str();
-		fragmentSourceCode = fragmentStream.str();
-	}
-
-	catch (std::ifstream::failure e)
-	{
-		std::cout << "Failed to get shader source." << std::endl;
-		return false;
-	}
-	const char* vertexSourcePointer = vertexSourceCode.c_str();
-	const char* fragmentSourcePointer = fragmentSourceCode.c_str();
-
+	// Vertex compilation
 	unsigned int vertexShader;
 	vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShader, 1, &vertexSourcePointer, NULL);
@@ -50,6 +23,7 @@ bool Shader::LoadProgram(std::string vertexShaderPath, std::string fragmentShade
 		return false;
 	}
 
+	// Fragment compilation
 	unsigned int fragmentShader;
 	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragmentShader, 1, &fragmentSourcePointer, NULL);
@@ -65,6 +39,7 @@ bool Shader::LoadProgram(std::string vertexShaderPath, std::string fragmentShade
 		return false;
 	}
 
+	// Program linking
 	_shaderProgramID = glCreateProgram();
 	glAttachShader(_shaderProgramID, vertexShader);
 	glAttachShader(_shaderProgramID, fragmentShader);

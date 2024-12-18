@@ -200,3 +200,18 @@ public:
 	}
 private:
 };
+
+class Sphere : public Mesh
+{
+public:
+	void BuildSphere()
+	{
+
+	}
+private:
+};
+
+class Quadsphere : public Mesh
+{
+
+};

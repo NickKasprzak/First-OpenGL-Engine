@@ -11,6 +11,8 @@ C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Render
 C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\Renderer.obj
 C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\SceneNode.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\SceneNode.obj
 C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Shader.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\Shader.obj
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\ShaderLoader.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\ShaderLoader.obj
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\ShaderManager.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\ShaderManager.obj
 C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Texture.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\Texture.obj
 C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\TextureLoader.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\TextureLoader.obj
 C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Time.cpp;C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\x64\Debug\Time.obj

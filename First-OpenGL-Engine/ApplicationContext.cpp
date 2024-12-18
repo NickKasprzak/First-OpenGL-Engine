@@ -11,6 +11,7 @@
 #include "Shader.h"
 #include "SceneNode.h"
 #include "Camera.h"
+#include "ShaderManager.h"
 
 ApplicationContext* ApplicationContext::_instance = nullptr;
 
@@ -23,7 +24,7 @@ std::vector<SceneNode> testRenderables;
 
 ApplicationContext* ApplicationContext::Instance()
 {
-	if (_instance == NULL)
+	if (_instance == nullptr)
 	{
 		_instance = new ApplicationContext();
 	}
@@ -51,13 +52,14 @@ int ApplicationContext::Initialize()
 
 	stbi_set_flip_vertically_on_load(true);
 
+	ShaderManager::Instance()->Initialize();
+
 	// temp camera
 	_window.SetCamera(&testCamera);
 	testCamera.SetPerspective(45.5f, 800.0f / 600.0f, 0.1f, 100.0f);
 
 	// temp shader
-	testShader.LoadProgram("C:/Users/AquaB/Documents/Projects/First-OpenGL-Engine/First-OpenGL-Engine/geometryPass.vert",
-						   "C:/Users/AquaB/Documents/Projects/First-OpenGL-Engine/First-OpenGL-Engine/geometryPass.frag");
+	testShader = *ShaderManager::Instance()->GetShader("GeometryPass");
 
 	// temp obj
 	testMesh.BuildCube();
@@ -82,6 +84,9 @@ int ApplicationContext::Initialize()
 
 void ApplicationContext::Dispose()
 {
+	ShaderManager::Instance()->Dispose();
+	delete(ShaderManager::Instance());
+
 	glfwTerminate();
 }
 

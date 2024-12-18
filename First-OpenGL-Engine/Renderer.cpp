@@ -1,4 +1,5 @@
 #include "Renderer.h"
+#include "ShaderManager.h"
 
 void Renderer::SetCamera(Camera* camera)
 {
@@ -33,7 +34,16 @@ void Renderer::GeometryPass()
 	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	/*
+	* Enable writing to the depth buffer for geometry.
+	* Geometry should be the only thing writing to the
+	* depth buffer, everything other pass reads from it.
+	*/
+	glDepthMask(GL_TRUE);
 	glEnable(GL_DEPTH_TEST);
+
+	// Also disable blending, it isn't needed here apparently (...really? What about transparency?)
+	glDisable(GL_BLEND);
 
 	/*
 	* Draw each object using their respective materials.
@@ -69,46 +79,49 @@ void Renderer::GeometryPass()
 		// Draw the object to the GBuffer
 		mesh->Draw();
 	}
+
+	// Disable depth testing
+	glDepthMask(GL_FALSE);
+	glDisable(GL_DEPTH_TEST);
 }
 
 void Renderer::LightingPass()
 {
-	// Restore and clear our default framebuffer
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	// Bind our GBuffer for reading
-	_gBuffer.BindForReading();
+	/*
+	* Enable blending for the lighting pass so
+	* we can combine the results of each light
+	* pass. We ensure blending is just adding
+	* values and ensuring they aren't modified
+	* beforehand.
+	*/
+	glEnable(GL_BLEND);
+	glBlendEquation(GL_FUNC_ADD);
+	glBlendFunc(GL_ONE, GL_ONE);
 
 	/*
-	* Read from and blit each texture in the GBuffer
-	* to the screen using BlitFramebuffer, copying
-	* the pixel contents of each texture to the
-	* specified space on the screen.
-	* 
-	* The first 8 arguments specify where the texture
-	* should be sampled and draw, while the 9th argument
-	* specifies what buffer should be read from and the
-	* 10th argument specifies scaling of the copied data.
+	* Bind our GBuffer for reading and clear
+	* the color buffer
 	*/
-	GLsizei HalfWidth = (GLsizei)(800.0f / 2.0f);
-	GLsizei HalfHeight = (GLsizei)(600.0f / 2.0f);
+	_gBuffer.BindForReading();
+	glClear(GL_COLOR_BUFFER_BIT);
 
-	_gBuffer.SetReadTarget(GBUFFER_POSITION);
-	glBlitFramebuffer(0, 0, 800, 600, 0, 0, HalfWidth, HalfHeight, GL_COLOR_BUFFER_BIT, GL_LINEAR);
+	// Do light-specific passes
+	DirectionalLightPass();
+	PointLightPass();
+	SpotlightPass();
+}
 
-	_gBuffer.SetReadTarget(GBUFFER_DIFFUSE);
-	glBlitFramebuffer(0, 0, 800, 600, 0, HalfHeight, HalfWidth, 600, GL_COLOR_BUFFER_BIT, GL_LINEAR);
+void Renderer::DirectionalLightPass()
+{
+	Shader* dirLightShader = ShaderManager::Instance()->GetShader("DirectionalLightPass");
+}
 
-	_gBuffer.SetReadTarget(GBUFFER_NORMAL);
-	glBlitFramebuffer(0, 0, 800, 600, HalfWidth, HalfHeight, 800, 600, GL_COLOR_BUFFER_BIT, GL_LINEAR);
+void Renderer::PointLightPass()
+{
 
-	_gBuffer.SetReadTarget(GBUFFER_UV);
-	glBlitFramebuffer(0, 0, 800, 600, HalfWidth, 0, 800, HalfHeight, GL_COLOR_BUFFER_BIT, GL_LINEAR);
+}
 
-	// Enable the lighting shader
-	// Each light type gets their own shader
-	// that gets defined and used independently
-	// of materials
+void Renderer::SpotlightPass()
+{
+
 }

@@ -29,6 +29,10 @@ public:
 	*/
 	GBuffer _gBuffer;
 private:
+	void DirectionalLightPass();
+	void PointLightPass();
+	void SpotlightPass();
+
 	RenderDrawBuffer _renderBuffer;
 	Camera* _camera;
 

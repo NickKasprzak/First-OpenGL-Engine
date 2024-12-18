@@ -22,6 +22,8 @@
     <ClCompile Include="RenderDrawBuffer.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="GBuffer.cpp" />
+    <ClCompile Include="ShaderManager.cpp" />
+    <ClCompile Include="ShaderLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ApplicationContext.h" />
@@ -42,6 +44,8 @@
     <ClInclude Include="Material.h" />
     <ClInclude Include="Uniform.h" />
     <ClInclude Include="GBuffer.h" />
+    <ClInclude Include="ShaderManager.h" />
+    <ClInclude Include="ShaderLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="geometryPass.frag" />
