@@ -22,7 +22,7 @@ public:
 	void BuildMesh(std::vector<Vertex> vertices);
 	void BuildMesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices);
 	void BuildMesh(std::vector<glm::vec3> positions, std::vector<glm::vec3> normals,
-				   std::vector<glm::vec2> texCoords, std::vector<unsigned int> indices);
+				   std::vector<glm::vec2> UVs, std::vector<unsigned int> indices);
 	void Dispose();
 
 	void Draw();

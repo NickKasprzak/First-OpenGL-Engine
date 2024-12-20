@@ -136,6 +136,7 @@
   <ItemGroup>
     <ClCompile Include="ApplicationContext.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="external\include\glad\glad.c" />
     <ClCompile Include="external\include\stb\stb_image.cpp" />
     <ClCompile Include="GBuffer.cpp" />
@@ -143,6 +144,9 @@
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshLoader.cpp" />
+    <ClCompile Include="PointLight.cpp" />
+    <ClCompile Include="PointLight.h" />
+    <ClCompile Include="Primitives.cpp" />
     <ClCompile Include="RenderDrawBuffer.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="SceneNode.cpp" />
@@ -157,6 +161,7 @@
   <ItemGroup>
     <ClInclude Include="ApplicationContext.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="GBuffer.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Mesh.h" />
@@ -177,8 +182,11 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="dirLightPass.frag" />
+    <None Include="lightPass.vert" />
     <None Include="geometryPass.frag" />
     <None Include="geometryPass.vert" />
+    <None Include="pointLightPass.frag" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

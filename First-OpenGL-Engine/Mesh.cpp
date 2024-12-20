@@ -45,8 +45,8 @@ void Mesh::Dispose()
 	if (VBO != 0) { glDeleteBuffers(1, &VBO); }
 	if (EBO != 0) { glDeleteBuffers(1, &EBO); }
 
-	_vertices = std::vector<Vertex>();
-	_indices = std::vector<unsigned int>();
+	_vertices.clear();
+	_indices.clear();
 }
 
 void Mesh::Draw()
@@ -79,8 +79,8 @@ void Mesh::GenerateBuffers()
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * _vertices.size(), &(_vertices[0]), GL_STATIC_DRAW);
 	if (!_indices.empty())
 	{
-		glBindBuffer(GL_ARRAY_BUFFER, EBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(unsigned int) * _indices.size(), &(_indices[0]), GL_STATIC_DRAW);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * _indices.size(), &(_indices[0]), GL_STATIC_DRAW);
 	}
 
 	glEnableVertexAttribArray(0);

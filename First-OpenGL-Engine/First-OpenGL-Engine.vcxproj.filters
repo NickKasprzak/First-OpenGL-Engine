@@ -24,6 +24,10 @@
     <ClCompile Include="GBuffer.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
+    <ClCompile Include="PointLight.h" />
+    <ClCompile Include="PointLight.cpp" />
+    <ClCompile Include="Primitives.cpp" />
+    <ClCompile Include="DirectionalLight.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ApplicationContext.h" />
@@ -46,10 +50,14 @@
     <ClInclude Include="GBuffer.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="ShaderLoader.h" />
+    <ClInclude Include="DirectionalLight.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="geometryPass.frag" />
     <None Include="geometryPass.vert" />
+    <None Include="lightPass.vert" />
+    <None Include="dirLightPass.frag" />
+    <None Include="pointLightPass.frag" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="external">

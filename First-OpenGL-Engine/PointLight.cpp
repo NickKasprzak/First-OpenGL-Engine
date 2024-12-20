@@ -1,16 +1,40 @@
 #include "PointLight.h"
 
-Sphere PointLight::GetLightVolume()
+float PointLight::CalcLightRadius()
 {
-	if (_isDirty)
-	{
-		UpdateLightVolume();
-	}
-
-	return _lightVolume;
+	return 0;
 }
 
-void PointLight::UpdateLightVolume()
+glm::vec3 PointLight::GetPosition()
 {
+	return _position;
+}
 
+glm::vec3 PointLight::GetAmbient()
+{
+	return _ambientColor;
+}
+
+glm::vec3 PointLight::GetDiffuse()
+{
+	return _diffuseColor;
+}
+glm::vec3 PointLight::GetSpecular()
+{
+	return _specularColor;
+}
+
+float PointLight::GetConstantTerm()
+{
+	return _constantTerm;
+}
+
+float PointLight::GetLinearTerm()
+{
+	return _linearTerm;
+}
+
+float PointLight::GetQuadraticTerm()
+{
+	return _quadraticTerm;
 }

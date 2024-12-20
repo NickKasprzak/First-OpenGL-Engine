@@ -5,13 +5,19 @@
 #include "RenderDrawBuffer.h"
 #include "SceneNode.h"
 #include "Camera.h"
+#include "DirectionalLight.h"
+#include "PointLight.h"
 
 class Renderer
 {
 public:
 	void SetCamera(Camera* camera);
+	void UpdateScreenSize(glm::vec2 screenSize) { _screenSize = screenSize; }
 
-	void PushRenderDrawCall(int fullscreenLayer, int viewport, int viewportLayer, SceneNode* node);	
+	void PushMeshDrawCall(int fullscreenLayer, int viewport, int viewportLayer, SceneNode* node);
+	void PushDirectionalLight(DirectionalLight* light);
+	void PushPointLight(PointLight* light);
+
 	void ProcessRenderCalls();
 	void ClearRenderBuffer();
 
@@ -32,9 +38,13 @@ private:
 	void DirectionalLightPass();
 	void PointLightPass();
 	void SpotlightPass();
+	void DrawGBufferContents();
 
 	RenderDrawBuffer _renderBuffer;
 	Camera* _camera;
 
+	glm::vec2 _screenSize = glm::vec2(800.0f, 600.0f);
 	std::vector<SceneNode*> tempNodes;
+	DirectionalLight* tempDirLight;
+	std::vector<PointLight*> tempPointLights;
 };

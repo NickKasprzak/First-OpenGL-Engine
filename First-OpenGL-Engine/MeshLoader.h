@@ -5,9 +5,8 @@
 #include <assimp/postprocess.h>
 #include <assimp/mesh.h>
 
-#include <stb/stb_image.h>
-
 #include <string>
+#include <iostream>
 
 #include "Mesh.h"
 

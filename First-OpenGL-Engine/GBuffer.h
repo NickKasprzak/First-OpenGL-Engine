@@ -23,6 +23,7 @@ public:
 	void BindForReading();
 	void SetReadTarget(GBufferType targetType);
 
+	std::vector<unsigned int> GetAttribTextures() { return _attribTextures; }
 private:
 	std::vector<unsigned int> _attribTextures;
 	unsigned int _depthTexture;

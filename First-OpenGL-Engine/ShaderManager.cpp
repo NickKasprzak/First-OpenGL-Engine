@@ -7,8 +7,8 @@ void ShaderManager::Initialize()
 {
 	// Load all default shaders (geometry, lighting, shadow, etc.)
 	RegisterShader("GeometryPass", "geometryPass.vert", "geometryPass.frag");
-	RegisterShader("DirectionalLightPass", "dirLightPass.vert", "dirLightPass.frag");
-	RegisterShader("PointLightPass", "pointLightPass.vert", "pointLightPass.frag");
+	RegisterShader("DirectionalLightPass", "lightPass.vert", "dirLightPass.frag");
+	RegisterShader("PointLightPass", "lightPass.vert", "pointLightPass.frag");
 	// spotlight pass
 	// shadow pass
 }

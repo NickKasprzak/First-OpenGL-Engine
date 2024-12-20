@@ -7,20 +7,23 @@
 
 #include "Time.h"
 #include "TextureLoader.h"
-#include "Primitives.h"
 #include "Shader.h"
 #include "SceneNode.h"
 #include "Camera.h"
 #include "ShaderManager.h"
+#include "MeshLoader.h"
+#include "Primitives.h"
+#include "DirectionalLight.h"
 
 ApplicationContext* ApplicationContext::_instance = nullptr;
 
 Camera testCamera;
 Shader testShader;
-Cube testMesh;
+Mesh testMesh;
 Texture testTexture;
 Material testMaterial;
 std::vector<SceneNode> testRenderables;
+DirectionalLight testDirLight;
 
 ApplicationContext* ApplicationContext::Instance()
 {
@@ -61,8 +64,13 @@ int ApplicationContext::Initialize()
 	// temp shader
 	testShader = *ShaderManager::Instance()->GetShader("GeometryPass");
 
+	// temp again
+	Primitives::BuildPrimitiveConstants();
+
 	// temp obj
-	testMesh.BuildCube();
+	MeshLoader meshLoader;
+	testMesh = meshLoader.LoadMeshFromPath("C:/Users/AquaB/Downloads/Sphere/sphere.obj");
+	//testMesh = Primitives::cube;
 
 	TextureLoader textureLoader;
 	testTexture = textureLoader.LoadTextureFromPath("C:/Users/AquaB/Downloads/OldSky.png");
@@ -76,7 +84,9 @@ int ApplicationContext::Initialize()
 	testRenderable.SetMaterial(&testMaterial);
 	testRenderables.push_back(testRenderable);
 
+	// not temp
 	_renderer._gBuffer.Initialize(800, 600);
+	_renderer.UpdateScreenSize(glm::vec2(800, 600));
 	_renderer.SetCamera(&testCamera);
 
 	return 1;
@@ -99,8 +109,9 @@ bool ApplicationContext::Update()
 
 	for (int i = 0; i < testRenderables.size(); i++)
 	{
-		_renderer.PushRenderDrawCall(0, 0, 0, &testRenderables[i]);
+		_renderer.PushMeshDrawCall(0, 0, 0, &testRenderables[i]);
 	}
+	_renderer.PushDirectionalLight(&testDirLight);
 	_renderer.ProcessRenderCalls();
 	_renderer.ClearRenderBuffer();
 
@@ -115,6 +126,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	if (windowUser != NULL)
 	{
 		windowUser->SetSize(width, height);
+		ApplicationContext::Instance()->GetRenderer()->UpdateScreenSize(glm::vec2(width, height));
 	}
 }
 

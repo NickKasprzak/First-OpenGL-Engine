@@ -10,9 +10,12 @@ layout (location = 0) out vec3 GB_Position;
 layout (location = 1) out vec3 GB_Diffuse;
 layout (location = 2) out vec3 GB_UV;
 layout (location = 3) out vec3 GB_Normal;
+// add specular map/texture?
 
 // Default diffuse/color map uniform
 uniform sampler2D diffuseMap;
+// add specular and bump maps?
+// have normal be pulled from a bump map instead?
 
 void main()
 {

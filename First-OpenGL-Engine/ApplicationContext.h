@@ -17,6 +17,9 @@ public:
 
 	bool Update();
 
+	Window* GetWindow() { return &_window; }
+	Renderer* GetRenderer() { return &_renderer; }
+
 private:
 	static ApplicationContext* _instance;
 	Window _window;

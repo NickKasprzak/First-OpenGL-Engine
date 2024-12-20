@@ -20,6 +20,8 @@ void GBuffer::Initialize(int width, int height)
 	{
 		glBindTexture(GL_TEXTURE_2D, _attribTextures[i]);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB32F, width, height, 0, GL_RGB, GL_FLOAT, NULL);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, _attribTextures[i], 0);
 	}
 
@@ -44,7 +46,7 @@ void GBuffer::Initialize(int width, int height)
 	GLenum drawBuffers[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2, GL_COLOR_ATTACHMENT3 };
 	glDrawBuffers(4, drawBuffers);
 
-	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 void GBuffer::Dispose()
@@ -54,11 +56,24 @@ void GBuffer::Dispose()
 
 void GBuffer::BindForReading()
 {
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 	glBindFramebuffer(GL_READ_FRAMEBUFFER, FBO);
+
+	/*
+	* Assign each of our textures to a texture unit
+	* so we can bind each of them to a sampler2D uniform
+	* before we begin reading.
+	*/
+	for (int i = 0; i < _attribTextures.size(); i++)
+	{
+		glActiveTexture(GL_TEXTURE0 + i);
+		glBindTexture(GL_TEXTURE_2D, _attribTextures[i]);
+	}
 }
 
 void GBuffer::BindForWriting()
 {
+	glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, FBO);
 }
 
