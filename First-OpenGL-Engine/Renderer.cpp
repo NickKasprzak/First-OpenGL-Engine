@@ -148,9 +148,7 @@ void Renderer::DirectionalLightPass()
 	dirLightShader->SetMat4Uniform("projection", identity);
 
 	// Set light uniforms
-	dirLightShader->SetVec3Uniform("ambientColor", tempDirLight->GetAmbient());
-	dirLightShader->SetVec3Uniform("diffuseColor", tempDirLight->GetDiffuse());
-	dirLightShader->SetVec3Uniform("specularColor", tempDirLight->GetSpecular());
+	dirLightShader->SetVec3Uniform("lightColor", tempDirLight->GetColor());
 	dirLightShader->SetVec3Uniform("lightDirection", tempDirLight->GetDirection());
 
 	// Set other uniforms

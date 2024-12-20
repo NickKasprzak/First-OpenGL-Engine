@@ -1,18 +1,8 @@
 #include "DirectionalLight.h"
 
-glm::vec3 DirectionalLight::GetAmbient()
+glm::vec3 DirectionalLight::GetColor()
 { 
-	return _ambientColor;
-}
-
-glm::vec3 DirectionalLight::GetDiffuse()
-{ 
-	return _diffuseColor; 
-}
-
-glm::vec3 DirectionalLight::GetSpecular()
-{ 
-	return _specularColor; 
+	return _color;
 }
 
 glm::vec3 DirectionalLight::GetDirection()
@@ -20,19 +10,9 @@ glm::vec3 DirectionalLight::GetDirection()
 	return _direction;
 }
 
-void DirectionalLight::SetAmbient(glm::vec3 ambient)
+void DirectionalLight::SetColor(glm::vec3 ambient)
 {
-	_ambientColor = glm::clamp(ambient, glm::vec3(0.0f), glm::vec3(1.0f));
-}
-
-void DirectionalLight::SetDiffuse(glm::vec3 diffuse)
-{
-	_diffuseColor = glm::clamp(diffuse, glm::vec3(0.0f), glm::vec3(1.0f));
-}
-
-void DirectionalLight::SetSpecular(glm::vec3 specular)
-{
-	_specularColor = glm::clamp(specular, glm::vec3(0.0f), glm::vec3(1.0f));
+	_color = glm::clamp(ambient, glm::vec3(0.0f), glm::vec3(1.0f));
 }
 
 void DirectionalLight::SetDirection(glm::vec3 direction)

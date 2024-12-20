@@ -15,19 +15,13 @@ public:
 	DirectionalLight() = default;
 	~DirectionalLight() = default;
 
-	glm::vec3 GetAmbient();
-	glm::vec3 GetDiffuse();
-	glm::vec3 GetSpecular();
+	glm::vec3 GetColor();
 	glm::vec3 GetDirection();
 
-	void SetAmbient(glm::vec3 ambient);
-	void SetDiffuse(glm::vec3 diffuse);
-	void SetSpecular(glm::vec3 specular);
+	void SetColor(glm::vec3 color);
 	void SetDirection(glm::vec3 direction);
 
 private:
-	glm::vec3 _ambientColor = glm::vec3(0.5f);
-	glm::vec3 _diffuseColor = glm::vec3(0.5f);
-	glm::vec3 _specularColor = glm::vec3(0.5f);
+	glm::vec3 _color = glm::vec3(0.5f);
 	glm::vec3 _direction = glm::vec3(-0.2f, -1.0f, -0.3f);
 };

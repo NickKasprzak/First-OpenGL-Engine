@@ -2,9 +2,7 @@
 out vec4 FragColor;
 
 // Directional light uniforms
-uniform vec3 ambientColor;
-uniform vec3 diffuseColor;
-uniform vec3 specularColor;
+uniform vec3 lightColor;
 uniform vec3 lightDirection;
 uniform vec3 viewPosition;
 
@@ -25,9 +23,9 @@ vec4 calcDirectionalLight(vec3 normal, vec3 viewDir)
 	float specularFactor = dot(viewDir, reflectDir);
 	specularFactor = pow(max(specularFactor, 0.0f), 32); // shininess
 
-	vec3 ambientLight = ambientColor;
-	vec3 diffuseLight = diffuseColor * diffuseFactor;
-	vec3 specularLight = specularColor * specularFactor;
+	vec3 ambientLight = lightColor;
+	vec3 diffuseLight = lightColor * diffuseFactor;
+	vec3 specularLight = vec3(1.0f) * specularFactor;
 	
 	return vec4(ambientLight + diffuseLight + specularLight, 1.0f);
 }
