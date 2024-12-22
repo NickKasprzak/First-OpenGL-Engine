@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Mesh.h"
+#include "MeshLoader.h"
 
 /*
 * Dont bother trying to do
@@ -324,11 +325,12 @@ public:
 	static void BuildPrimitiveConstants()
 	{
 		cube.BuildCube();
-		sphere.BuildSphere();
+		MeshLoader meshLoader;
+		sphere = meshLoader.LoadMeshFromPath("C:/Users/AquaB/Downloads/Sphere/sphere.obj");
 		quad.BuildQuad();
 	}
 
 	static Cube cube;
-	static Sphere sphere;
+	static Mesh sphere;
 	static Quad quad;
 };

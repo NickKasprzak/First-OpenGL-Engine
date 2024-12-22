@@ -1,40 +1,41 @@
 #include "PointLight.h"
 
-float PointLight::CalcLightRadius()
-{
-	return 0;
-}
-
 glm::vec3 PointLight::GetPosition()
 {
 	return _position;
 }
 
-glm::vec3 PointLight::GetAmbient()
+glm::vec3 PointLight::GetColor()
 {
-	return _ambientColor;
+	return _color;
 }
 
-glm::vec3 PointLight::GetDiffuse()
+float PointLight::GetRadius()
 {
-	return _diffuseColor;
-}
-glm::vec3 PointLight::GetSpecular()
-{
-	return _specularColor;
+	return _radius;
 }
 
-float PointLight::GetConstantTerm()
+float PointLight::GetIntensity()
 {
-	return _constantTerm;
+	return _intensity;
 }
 
-float PointLight::GetLinearTerm()
+void PointLight::SetPosition(glm::vec3 position)
 {
-	return _linearTerm;
+	_position = position;
 }
 
-float PointLight::GetQuadraticTerm()
+void PointLight::SetColor(glm::vec3 color)
 {
-	return _quadraticTerm;
+	_color = glm::clamp(color, glm::vec3(0.0f), glm::vec3(1.0f));
+}
+
+void PointLight::SetRadius(float radius)
+{
+	_radius = fmax(radius, 0.0f);
+}
+
+void PointLight::SetIntensity(float intensity)
+{
+	_intensity = fmax(intensity, 0.0f);
 }

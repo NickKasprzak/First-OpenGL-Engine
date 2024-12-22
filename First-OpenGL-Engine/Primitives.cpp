@@ -1,4 +1,4 @@
 #include "Primitives.h"
 Cube Primitives::cube = Cube();
-Sphere Primitives::sphere = Sphere();
+Mesh Primitives::sphere = Mesh();
 Quad Primitives::quad = Quad();

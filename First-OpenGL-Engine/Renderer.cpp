@@ -130,8 +130,16 @@ void Renderer::LightingPass()
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	// Do light-specific passes
-	DirectionalLightPass();
-	PointLightPass();
+	if (tempDirLight != nullptr)
+	{
+		DirectionalLightPass();
+	}
+
+	if (!tempPointLights.empty())
+	{
+		PointLightPass();
+	}
+
 	SpotlightPass();
 }
 
@@ -140,6 +148,16 @@ void Renderer::DirectionalLightPass()
 	Shader* dirLightShader = ShaderManager::Instance()->GetShader("DirectionalLightPass");
 
 	dirLightShader->Use();
+
+	/*
+	* Bind each of the GBuffer's textures to their corresponding units
+	* The enums used for the GBuffer's textures should always map directly
+	* to the texture units they correspond to.
+	*/
+	dirLightShader->SetIntUniform("GB_Position", GBUFFER_POSITION);
+	dirLightShader->SetIntUniform("GB_Diffuse", GBUFFER_DIFFUSE);
+	dirLightShader->SetIntUniform("GB_UV", GBUFFER_UV);
+	dirLightShader->SetIntUniform("GB_Normal", GBUFFER_NORMAL);
 
 	// Set MVP matrix to an identity
 	glm::mat4 identity = glm::mat4(1.0f);
@@ -154,16 +172,6 @@ void Renderer::DirectionalLightPass()
 	// Set other uniforms
 	dirLightShader->SetVec3Uniform("viewPosition", _camera->GetPosition());
 	dirLightShader->SetVec2Uniform("screenSize", _screenSize);
-
-	/*
-	* Bind each of the GBuffer's textures to their corresponding units
-	* The enums used for the GBuffer's textures should always map directly
-	* to the texture units they correspond to.
-	*/
-	dirLightShader->SetIntUniform("GB_Position", GBUFFER_POSITION);
-	dirLightShader->SetIntUniform("GB_Diffuse", GBUFFER_DIFFUSE);
-	dirLightShader->SetIntUniform("GB_UV", GBUFFER_UV);
-	dirLightShader->SetIntUniform("GB_Normal", GBUFFER_NORMAL);
 
 	Primitives::quad.Draw();
 }
@@ -183,7 +191,29 @@ void Renderer::PointLightPass()
 	pointLightShader->SetMat4Uniform("view", _camera->GetViewMatrix());
 	pointLightShader->SetMat4Uniform("projection", _camera->GetProjectionMatrix());
 
+	// Bind other stuff
+	pointLightShader->SetVec3Uniform("viewPosition", _camera->GetPosition());
+	pointLightShader->SetVec2Uniform("screenSize", _screenSize);
+
 	// Bind and draw each point light
+	for (int i = 0; i < tempPointLights.size(); i++)
+	{
+		PointLight* light = tempPointLights[i];
+		glm::vec3 position = light->GetPosition();
+		float scale = light->GetRadius();
+		
+		glm::mat4 model(1.0f);
+		model = glm::translate(model, position);
+		model = glm::scale(model, glm::vec3(scale));
+		pointLightShader->SetMat4Uniform("model", model);
+
+		pointLightShader->SetVec3Uniform("lightPosition", position);
+		pointLightShader->SetVec3Uniform("lightColor", light->GetColor());
+		pointLightShader->SetFloatUniform("radius", light->GetRadius());
+		pointLightShader->SetFloatUniform("intensity", light->GetIntensity());
+
+		Primitives::sphere.Draw();
+	}
 }
 
 void Renderer::SpotlightPass()

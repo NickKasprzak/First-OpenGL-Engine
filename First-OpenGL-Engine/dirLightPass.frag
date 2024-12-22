@@ -4,7 +4,6 @@ out vec4 FragColor;
 // Directional light uniforms
 uniform vec3 lightColor;
 uniform vec3 lightDirection;
-uniform vec3 viewPosition;
 
 // GBuffer uniforms
 uniform sampler2D GB_Position;
@@ -12,6 +11,7 @@ uniform sampler2D GB_Diffuse;
 uniform sampler2D GB_UV;
 uniform sampler2D GB_Normal;
 
+uniform vec3 viewPosition;
 uniform vec2 screenSize;
 
 vec4 calcDirectionalLight(vec3 normal, vec3 viewDir)
@@ -32,11 +32,11 @@ vec4 calcDirectionalLight(vec3 normal, vec3 viewDir)
 
 void main()
 {
-	vec2 fragScreenPos = gl_FragCoord.xy / screenSize;
+	vec2 texPos = gl_FragCoord.xy / screenSize;
 
-	vec3 fragPos = vec3(texture(GB_Position, fragScreenPos));
-	vec3 fragColor = vec3(texture(GB_Diffuse, fragScreenPos));
-	vec3 fragNormal = vec3(texture(GB_Normal, fragScreenPos));
+	vec3 fragPos = vec3(texture(GB_Position, texPos));
+	vec3 fragColor = vec3(texture(GB_Diffuse, texPos));
+	vec3 fragNormal = vec3(texture(GB_Normal, texPos));
 	fragNormal = normalize(fragNormal);
 
 	vec3 viewDir = normalize(viewPosition - fragPos);

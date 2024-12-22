@@ -7,8 +7,6 @@
 * light shader's uniforms if it doesn't
 * change at all?
 */
-
-// do we really need all these getters and setters?
 class DirectionalLight
 {
 public:

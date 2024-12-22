@@ -14,6 +14,7 @@
 #include "MeshLoader.h"
 #include "Primitives.h"
 #include "DirectionalLight.h"
+#include "PointLight.h"
 
 ApplicationContext* ApplicationContext::_instance = nullptr;
 
@@ -24,6 +25,7 @@ Texture testTexture;
 Material testMaterial;
 std::vector<SceneNode> testRenderables;
 DirectionalLight testDirLight;
+std::vector<PointLight> testPointLights;
 
 ApplicationContext* ApplicationContext::Instance()
 {
@@ -84,6 +86,17 @@ int ApplicationContext::Initialize()
 	testRenderable.SetMaterial(&testMaterial);
 	testRenderables.push_back(testRenderable);
 
+	PointLight pointLight1;
+	pointLight1.SetPosition(glm::vec3(0, 2, 0));
+	pointLight1.SetIntensity(1);
+	testPointLights.push_back(pointLight1);
+
+	PointLight pointLight2;
+	pointLight2.SetPosition(glm::vec3(2, 0, 0));
+	pointLight2.SetIntensity(1);
+	pointLight2.SetColor(glm::vec3(1.0f, 0.0f, 0.0f));
+	testPointLights.push_back(pointLight2);
+
 	// not temp
 	_renderer._gBuffer.Initialize(800, 600);
 	_renderer.UpdateScreenSize(glm::vec2(800, 600));
@@ -112,6 +125,10 @@ bool ApplicationContext::Update()
 		_renderer.PushMeshDrawCall(0, 0, 0, &testRenderables[i]);
 	}
 	_renderer.PushDirectionalLight(&testDirLight);
+	for (int i = 0; i < testPointLights.size(); i++)
+	{
+		_renderer.PushPointLight(&testPointLights[i]);
+	}
 	_renderer.ProcessRenderCalls();
 	_renderer.ClearRenderBuffer();
 

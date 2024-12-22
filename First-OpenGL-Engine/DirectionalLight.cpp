@@ -10,9 +10,9 @@ glm::vec3 DirectionalLight::GetDirection()
 	return _direction;
 }
 
-void DirectionalLight::SetColor(glm::vec3 ambient)
+void DirectionalLight::SetColor(glm::vec3 color)
 {
-	_color = glm::clamp(ambient, glm::vec3(0.0f), glm::vec3(1.0f));
+	_color = glm::clamp(color, glm::vec3(0.0f), glm::vec3(1.0f));
 }
 
 void DirectionalLight::SetDirection(glm::vec3 direction)

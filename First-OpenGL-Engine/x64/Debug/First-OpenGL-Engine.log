@@ -3,17 +3,4 @@
 C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Time.h(12,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   (compiling source file 'ApplicationContext.cpp')
   
-  DirectionalLight.cpp
-  PointLight.cpp
-  PointLight.h
-  Renderer.cpp
-C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Time.h(12,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  (compiling source file 'Renderer.cpp')
-  
-  main.cpp
-C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Time.h(12,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  (compiling source file 'main.cpp')
-  
-  Generating Code...
-x64\Debug\PointLight.obj : warning LNK4042: object specified more than once; extras ignored
   First-OpenGL-Engine.vcxproj -> C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\x64\Debug\First-OpenGL-Engine.exe
