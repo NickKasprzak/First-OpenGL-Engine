@@ -128,6 +128,9 @@ void Renderer::LightingPass()
 	*/
 	_gBuffer.BindForReading();
 	glClear(GL_COLOR_BUFFER_BIT);
+	
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
 
 	// Do light-specific passes
 	if (tempDirLight != nullptr)
@@ -178,6 +181,10 @@ void Renderer::DirectionalLightPass()
 
 void Renderer::PointLightPass()
 {
+	// Enable face culling and cull front faces
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_FRONT);
+
 	Shader* pointLightShader = ShaderManager::Instance()->GetShader("PointLightPass");
 	pointLightShader->Use();
 
@@ -214,6 +221,10 @@ void Renderer::PointLightPass()
 
 		Primitives::sphere.Draw();
 	}
+
+	// Disable face culling
+	glDisable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
 }
 
 void Renderer::SpotlightPass()
