@@ -109,13 +109,13 @@ void Material::SetTexture(std::string name, Texture* texture, unsigned int unit)
 	{
 		_textureUniforms[name].Unit = unit;
 		_textureUniforms[name].Texture = texture;
-	}
 
-	/*
-	* Make sure the sampler uniform has been bound
-	* to the given texture ID for binding the texture's
-	* data during drawing.
-	*/
-	_shader->Use();
-	_shader->SetIntUniform(name, unit);
+		/*
+		* Make sure the sampler uniform has been bound
+		* to the given texture ID for binding the texture's
+		* data during drawing.
+		*/
+		_shader->Use();
+		_shader->SetIntUniform(name, unit);
+	}
 }

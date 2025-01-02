@@ -7,6 +7,7 @@ enum UniformType
 	UNIFORM_BOOL,
 	UNIFORM_INT,
 	UNIFORM_FLOAT,
+	UNIFORM_VEC2,
 	UNIFORM_VEC3,
 	UNIFORM_MAT3,
 	UNIFORM_MAT4
@@ -14,7 +15,9 @@ enum UniformType
 
 struct Uniform
 {
-
+	UniformType Type;
+	std::string Name;
+	unsigned int Location;
 };
 
 struct UniformData

@@ -87,12 +87,12 @@ int ApplicationContext::Initialize()
 	testRenderables.push_back(testRenderable);
 
 	PointLight pointLight1;
-	pointLight1.SetPosition(glm::vec3(0, 2, 0));
+	pointLight1.SetPosition(glm::vec3(0, 3, 0));
 	pointLight1.SetIntensity(1);
 	testPointLights.push_back(pointLight1);
 
 	PointLight pointLight2;
-	pointLight2.SetPosition(glm::vec3(2, 0, 0));
+	pointLight2.SetPosition(glm::vec3(3, 0, 0));
 	pointLight2.SetIntensity(1);
 	pointLight2.SetColor(glm::vec3(1.0f, 0.0f, 0.0f));
 	testPointLights.push_back(pointLight2);

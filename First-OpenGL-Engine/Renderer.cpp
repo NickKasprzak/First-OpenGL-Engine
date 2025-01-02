@@ -88,7 +88,8 @@ void Renderer::GeometryPass()
 		std::map<std::string, TextureData>* textures = mat->GetAllTextures();
 		for (auto it = textures->begin(); it != textures->end(); it++)
 		{
-			it->second.Texture->Bind(it->second.Unit);
+			TextureData data = it->second;
+			data.Texture->Bind(data.Unit);
 		}
 
 		// Bind all material specific uniforms

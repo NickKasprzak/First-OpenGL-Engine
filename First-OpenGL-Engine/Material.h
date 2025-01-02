@@ -7,6 +7,12 @@
 #include "Shader.h"
 #include "Uniform.h"
 
+/*
+* Material class that acts as a container
+* for any uniform data or OpenGL configurations
+* a shader might need before the shader program
+* is executed.
+*/
 class Material
 {
 public:
@@ -15,13 +21,14 @@ public:
 
 	void UseShader();
 
+	// Depth Config
 	bool DepthTest = false;
 	bool DepthWrite = false;
 	GLenum DepthCompare = GL_LESS;
 
-	// blending/translucency
+	// Blend Config
 
-	// shadows
+	// Shadow Config
 
 	unsigned int GetID();
 	UniformData GetUniform(std::string name);
@@ -34,8 +41,10 @@ public:
 	* Used to set material specific values that
 	* change how its correspond shader is configured.
 	* 
-	* Should NOT be used for anything that changes
-	* on an object to object or frame to frame basis.
+	* Should NOT be used for anything that is object
+	* specific (MVP matrices, colors, position data, etc.).
+	* All of that gets set during the render command loop
+	* through direct access to its shader.
 	*/
 	void SetBool(std::string name, bool value);
 	void SetInt(std::string name, int value);
@@ -49,7 +58,11 @@ private:
 	Shader* _shader;
 	unsigned int _ID;
 
-	// Loop through these when using the shader(?)
+	/*
+	* Data corresponding to the uniforms the
+	* shader attached to the material needs
+	* to be rendered properly.
+	*/
 	std::map<std::string, UniformData> _uniforms;
 	std::map<std::string, TextureData> _textureUniforms;
 };

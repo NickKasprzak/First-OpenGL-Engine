@@ -28,6 +28,7 @@
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="Primitives.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
+    <ClCompile Include="RenderTarget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ApplicationContext.h" />
@@ -51,6 +52,7 @@
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="ShaderLoader.h" />
     <ClInclude Include="DirectionalLight.h" />
+    <ClInclude Include="RenderTarget.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="geometryPass.frag" />

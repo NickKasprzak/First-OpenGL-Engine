@@ -149,6 +149,7 @@
     <ClCompile Include="Primitives.cpp" />
     <ClCompile Include="RenderDrawBuffer.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="RenderTarget.cpp" />
     <ClCompile Include="SceneNode.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="RenderDrawBuffer.h" />
     <ClInclude Include="RenderContext.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="RenderTarget.h" />
     <ClInclude Include="SceneNode.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />
