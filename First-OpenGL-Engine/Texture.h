@@ -5,37 +5,31 @@
 class Texture
 {
 public:
-	// Generate as empty
-	void Generate();
-	// Generate with existing data
-	void Generate(int width, int height, int nrComponents, void* data);
-
+	void Generate(int width, int height, GLenum internalFormat, GLenum format, GLenum type, bool hasMipmaps, void* data);
 	void Dispose();
 
 	// Bind/Unbind texture to its respective target
 	void Bind(int textureUnit = -1);
 	void Unbind();
 
-	// Set texture's corresponding uniform name for binding to a shader
-	void SetType(std::string uniformName) { uniformName = uniformName; }
-
 	unsigned int GetID() { return _ID; }
-	std::string GetType() { return uniformName; }
-	std::string GetPath() { return _path; }
+
+	void SetWrapMode(GLenum wrapMode);
+	void SetMinFilter(GLenum minFilter);
+	void SetMagFilter(GLenum magFilter);
 
 private:
-	unsigned int _ID;
-	std::string uniformName;
-	std::string _path;
+	unsigned int _ID = 0;
 
 	int _width;
 	int _height;
 	GLenum _target;
 	GLenum _internalFormat;
 	GLenum _format;
-	GLenum _sizeType;
+	GLenum _type;
+	bool _hasMipmaps = false; 
 
-	GLenum _wrapMode;
-	GLenum _minFilter;
-	GLenum _magFilter;
+	GLenum _wrapMode = GL_REPEAT;
+	GLenum _minFilter = GL_NEAREST;
+	GLenum _magFilter = GL_NEAREST;
 };

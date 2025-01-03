@@ -10,6 +10,11 @@
 
 #include "Mesh.h"
 
+/*
+* Update this to load a vector of meshes from
+* an obj file. Have it combine all meshes in
+* a model into one single mesh.
+*/
 class MeshLoader
 {
 public:

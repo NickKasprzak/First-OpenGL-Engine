@@ -80,6 +80,8 @@ void Renderer::GeometryPass()
 
 		// Defaults that get set independent of the material uniforms
 		// View and Projection would ideally get once in a batched call by shader
+
+		// Do MVP calculations outside the shader
 		shader->SetMat4Uniform("model", tempNodes[i]->_modelMatrix);
 		shader->SetMat4Uniform("view", _camera->GetViewMatrix());
 		shader->SetMat4Uniform("projection", _camera->GetProjectionMatrix());

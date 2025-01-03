@@ -76,7 +76,6 @@ int ApplicationContext::Initialize()
 
 	TextureLoader textureLoader;
 	testTexture = textureLoader.LoadTextureFromPath("C:/Users/AquaB/Downloads/OldSky.png");
-	testTexture.SetType("diffuseMap");
 
 	testMaterial.Initialize(&testShader, 0);
 	testMaterial.SetTexture("diffuseMap", &testTexture, 1);
