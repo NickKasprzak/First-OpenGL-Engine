@@ -7,7 +7,7 @@ int main()
 	int success = ApplicationContext::Instance()->Initialize();
 	if (success == -1)
 	{
-		std::cout << "Shat the bed :(" << std::endl;
+		std::cout << "Failed to initialize!" << std::endl;
 		return -1;
 	}
 
