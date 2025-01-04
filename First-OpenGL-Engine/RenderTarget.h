@@ -1,5 +1,6 @@
 #pragma once
 #include <glad/glad.h>
+#include <vector>
 
 #include "Texture.h"
 
@@ -9,13 +10,18 @@ public:
 	RenderTarget() = default;
 	~RenderTarget() = default;
 
-	void Initialize(int width, int height, int numColorAttachments, bool hasDepthStencil);
+	bool Initialize(int width, int height, int numColorAttachments, bool hasDepthStencil);
 	void Dispose();
 
-	Texture* GetColorAttachment(unsigned int colorAttachmentID);
+	Texture* GetColorBuffer(unsigned int ID);
+	Texture* GetDepthBuffer();
 private:
 	unsigned int FBO;
+	int _width;
+	int _height;
+	bool _hasDepthStencil;
 
-	// Pool textures later?
-	
+	// Pool these guys?
+	std::vector<Texture> _colorBuffers;
+	Texture _depthStencilBuffer;
 };
