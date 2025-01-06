@@ -23,6 +23,7 @@ public:
 
 	void GeometryPass();
 	void LightingPass();
+	void ShadowPass();
 
 	/*
 	* Public for now, not sure if we would
@@ -38,6 +39,7 @@ private:
 	void DirectionalLightPass();
 	void PointLightPass();
 	void SpotlightPass();
+	void DirectionalShadowPass();
 	void DrawGBufferContents();
 
 	RenderDrawBuffer _renderBuffer;

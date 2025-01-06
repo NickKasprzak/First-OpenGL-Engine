@@ -185,6 +185,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="dirLightPass.frag" />
+    <None Include="dirLightShadowMapPass.frag" />
+    <None Include="dirLightShadowMapPass.vert" />
     <None Include="lightPass.vert" />
     <None Include="geometryPass.frag" />
     <None Include="geometryPass.vert" />

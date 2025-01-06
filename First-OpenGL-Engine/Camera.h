@@ -20,7 +20,7 @@ enum CameraInput
 class Camera
 {
 public:
-	Camera() { UpdateViewMatrix(); };
+	Camera() { _updateViewMatrix(); };
 	~Camera() {};
 
 	void HandleCursorInput(double xPos, double yPos);
@@ -35,7 +35,7 @@ public:
 	glm::vec3 GetDirection();
 
 private:
-	void UpdateViewMatrix();
+	void _updateViewMatrix();
 
 	glm::vec3 _pos = glm::vec3(0.0f, 0.0f, 3.0f);
 	glm::vec3 _forward = glm::vec3(0.0f, 0.0f, -1.0f);

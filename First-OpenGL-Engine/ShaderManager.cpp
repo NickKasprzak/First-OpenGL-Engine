@@ -10,7 +10,9 @@ void ShaderManager::Initialize()
 	RegisterShader("DirectionalLightPass", "lightPass.vert", "dirLightPass.frag");
 	RegisterShader("PointLightPass", "lightPass.vert", "pointLightPass.frag");
 	// spotlight pass
-	// shadow pass
+	RegisterShader("DirLightShadowMapPass", "dirLightShadowMapPass.vert", "dirLightShadowMapPass.frag");
+	//RegisterShader("DirLightShadowDrawPass", "dirLightShadowDrawPass.vert", "dirLightShadowDrawPass.frag");
+	// point shadow pass
 }
 
 void ShaderManager::Dispose()

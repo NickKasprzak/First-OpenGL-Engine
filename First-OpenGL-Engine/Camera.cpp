@@ -34,7 +34,7 @@ void Camera::HandleCursorInput(double xPos, double yPos)
 	_forward.z = sin(glm::radians(_yaw)) * cos(glm::radians(_pitch));
 	_forward = glm::normalize(_forward);
 
-	UpdateViewMatrix();
+	_updateViewMatrix();
 }
 
 void Camera::HandleKeyboardInput(CameraInput inputType)
@@ -59,7 +59,7 @@ void Camera::HandleKeyboardInput(CameraInput inputType)
 		break;
 	}
 
-	UpdateViewMatrix();
+	_updateViewMatrix();
 }
 
 void Camera::SetPerspective(float fov, float aspectRatio, float nearPlane, float farPlane)
@@ -102,7 +102,7 @@ glm::vec3 Camera::GetDirection()
 	return _forward;
 }
 
-void Camera::UpdateViewMatrix()
+void Camera::_updateViewMatrix()
 {
 	_viewMatrix = glm::lookAt(_pos, _pos + _forward, _up);
 }

@@ -2,6 +2,9 @@
 
 void GBuffer::Initialize(int width, int height)
 {
+	_width = width;
+	_height = height;
+
 	// Generate framebuffer
 	glGenFramebuffers(1, &FBO);
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, FBO);
@@ -75,6 +78,7 @@ void GBuffer::BindForWriting()
 {
 	glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, FBO);
+	glViewport(0, 0, _width, _height);
 }
 
 void GBuffer::SetReadTarget(GBufferType type)

@@ -28,4 +28,7 @@ private:
 	std::vector<unsigned int> _attribTextures;
 	unsigned int _depthTexture;
 	unsigned int FBO;
+
+	int _width;
+	int _height;
 };

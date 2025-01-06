@@ -8,6 +8,7 @@ void Renderer::SetCamera(Camera* camera)
 	_camera = camera;
 }
 
+// viewport and viewport layer might make more sense as rendertarget and color attachment
 void Renderer::PushMeshDrawCall(int fullscreenLayer, int viewport, int viewportLayer, SceneNode* node)
 {
 	tempNodes.push_back(node);
@@ -35,6 +36,7 @@ void Renderer::ProcessRenderCalls()
 {
 	GeometryPass();
 	LightingPass();
+	ShadowPass();
 	//DrawGBufferContents();
 	
 
@@ -61,7 +63,7 @@ void Renderer::GeometryPass()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
 
-	// Also disable blending, it isn't needed here apparently (...really? What about transparency?)
+	// Also disable blending
 	glDisable(GL_BLEND);
 
 	/*
@@ -113,6 +115,7 @@ void Renderer::LightingPass()
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glViewport(0, 0, _screenSize.x, _screenSize.y);
 
 	/*
 	* Enable blending for the lighting pass so
@@ -233,6 +236,40 @@ void Renderer::PointLightPass()
 void Renderer::SpotlightPass()
 {
 
+}
+
+void Renderer::ShadowPass()
+{
+	DirectionalShadowPass();
+}
+
+void Renderer::DirectionalShadowPass()
+{
+	// make sure you bind the GBuffer for positional and depth stuff
+	// when doing the second pass of drawing the shadows
+
+	// First pass: Render scene from light's perspective
+
+	// Bind the directional light's render buffer as the current target
+	RenderTarget* shadowMap = tempDirLight->GetShadowMap();
+	glViewport(0, 0, shadowMap->GetWidth(), shadowMap->GetHeight());
+	glBindFramebuffer(GL_FRAMEBUFFER, shadowMap->GetID());
+	glClear(GL_DEPTH_BUFFER_BIT);
+
+	// Use and config the shadow map shader
+	Shader* shadowShader = ShaderManager::Instance()->GetShader("DirLightShadowMapPass");
+	shadowShader->Use();
+	shadowShader->SetMat4Uniform("LVP", tempDirLight->GetLVPMatrix());
+
+	// Draw scene
+	for (int i = 0; i < tempNodes.size(); i++)
+	{
+		shadowShader->SetMat4Uniform("model", tempNodes[i]->_modelMatrix);
+		tempNodes[i]->_mesh->Draw();
+	}
+
+	// Second pass: Render shadows based on depths present in light
+	// shadow map and the depth buffer in the GBuffer
 }
 
 void Renderer::DrawGBufferContents()

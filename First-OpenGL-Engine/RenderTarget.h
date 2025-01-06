@@ -13,8 +13,12 @@ public:
 	bool Initialize(int width, int height, int numColorAttachments, bool hasDepthStencil);
 	void Dispose();
 
+	int GetID();
 	Texture* GetColorBuffer(unsigned int ID);
 	Texture* GetDepthBuffer();
+
+	int GetWidth();
+	int GetHeight();
 private:
 	unsigned int FBO;
 	int _width;
