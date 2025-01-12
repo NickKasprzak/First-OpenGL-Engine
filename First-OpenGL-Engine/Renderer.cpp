@@ -146,10 +146,13 @@ void Renderer::LightingPass()
 
 	if (!tempPointLights.empty())
 	{
-		PointLightPass();
+		//PointLightPass();
 	}
 
 	SpotlightPass();
+
+	// Disable blending
+	glDisable(GL_BLEND);
 }
 
 void Renderer::DirectionalLightPass()
@@ -228,8 +231,8 @@ void Renderer::PointLightPass()
 		Primitives::sphere.Draw();
 	}
 
-	// Disable face culling
-	glDisable(GL_CULL_FACE);
+	// Revert face culling back
+	// to back face culling
 	glCullFace(GL_BACK);
 }
 
@@ -245,19 +248,25 @@ void Renderer::ShadowPass()
 
 void Renderer::DirectionalShadowPass()
 {
-	// make sure you bind the GBuffer for positional and depth stuff
-	// when doing the second pass of drawing the shadows
-
 	// First pass: Render scene from light's perspective
+	// finally draws the depth map but its all white
 
 	// Bind the directional light's render buffer as the current target
 	RenderTarget* shadowMap = tempDirLight->GetShadowMap();
-	glViewport(0, 0, shadowMap->GetWidth(), shadowMap->GetHeight());
 	glBindFramebuffer(GL_FRAMEBUFFER, shadowMap->GetID());
+	glViewport(0, 0, shadowMap->GetWidth(), shadowMap->GetHeight());
+	shadowMap->GetDepthBuffer()->Bind();
+
+	// Enable depth testing and clear the depth buffer
+	glDepthMask(GL_TRUE);
 	glClear(GL_DEPTH_BUFFER_BIT);
+	glEnable(GL_DEPTH_TEST);
+
+	// theres some crap going on with how the LVP matrix is calculated thats messing with the way the depth function is calculated
+	// first the values needed to be tweaked, now the circle isnt showing up at all
 
 	// Use and config the shadow map shader
-	Shader* shadowShader = ShaderManager::Instance()->GetShader("DirLightShadowMapPass");
+	Shader* shadowShader = ShaderManager::Instance()->GetShader("DirLightShadowMapPass"); // rename to depth map shader?
 	shadowShader->Use();
 	shadowShader->SetMat4Uniform("LVP", tempDirLight->GetLVPMatrix());
 
@@ -268,8 +277,54 @@ void Renderer::DirectionalShadowPass()
 		tempNodes[i]->_mesh->Draw();
 	}
 
-	// Second pass: Render shadows based on depths present in light
-	// shadow map and the depth buffer in the GBuffer
+	/*
+	* Second pass: Render shadows based on depths present in light's
+	* shadow map and the depth buffer in the GBuffer
+	*/
+
+	// Bind the default framebuffer as the current draw target
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glClear(GL_DEPTH_BUFFER_BIT);
+	glViewport(0, 0, _screenSize.x, _screenSize.y);
+
+	// Disable the depth mask and depth testing
+	glDepthMask(GL_FALSE);
+	glDisable(GL_DEPTH_TEST);
+
+	// Enable blending so we draw over existing fragments with shadows
+	//glEnable(GL_BLEND);
+	//glBlendEquation(GL_FUNC_ADD);
+	//glBlendFunc(GL_ONE, GL_ONE);
+
+	// Config the shadow shader with our depth buffers and other uniforms
+	Shader* shadowDrawShader = ShaderManager::Instance()->GetShader("DirLightShadowDrawPass");
+	shadowDrawShader->Use();
+	
+	shadowDrawShader->SetVec2Uniform("screenSize", _screenSize);
+	shadowDrawShader->SetMat4Uniform("LVP", tempDirLight->GetLVPMatrix());
+
+	// light map buffer isnt being drawn to correctly. values are either 0 or 1 and no where in between.
+	unsigned int lightMapUnit = 0;
+	shadowDrawShader->SetIntUniform("lightShadowMap", lightMapUnit);
+	tempDirLight->GetShadowMap()->GetDepthBuffer()->Bind(lightMapUnit);
+	//_gBuffer.SetDepthReadTarget(0);
+
+	unsigned int positionMapUnit = 1;
+	shadowDrawShader->SetIntUniform("positionBuffer", positionMapUnit);
+	_gBuffer.SetColorReadTarget(GBUFFER_POSITION, positionMapUnit);
+
+	// Draw a screenspace quad
+	glm::mat4 identity = glm::mat4(1.0f);
+	shadowDrawShader->SetMat4Uniform("model", identity);
+	shadowDrawShader->SetMat4Uniform("view", identity);
+	shadowDrawShader->SetMat4Uniform("projection", identity);
+	Primitives::quad.Draw();
+
+	// Revert blend and depth funcs back
+	// to their defaults
+	glDepthMask(GL_TRUE);
+	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_BLEND);
 }
 
 void Renderer::DrawGBufferContents()
@@ -295,12 +350,12 @@ void Renderer::DrawGBufferContents()
 	*/
 	GLsizei HalfWidth = (GLsizei)(800.0f / 2.0f);
 	GLsizei HalfHeight = (GLsizei)(600.0f / 2.0f);
-	_gBuffer.SetReadTarget(GBUFFER_POSITION);
+	_gBuffer.SetColorReadTarget(GBUFFER_POSITION);
 	glBlitFramebuffer(0, 0, 800, 600, 0, 0, HalfWidth, HalfHeight, GL_COLOR_BUFFER_BIT, GL_LINEAR);
-	_gBuffer.SetReadTarget(GBUFFER_DIFFUSE);
+	_gBuffer.SetColorReadTarget(GBUFFER_DIFFUSE);
 	glBlitFramebuffer(0, 0, 800, 600, 0, HalfHeight, HalfWidth, 600, GL_COLOR_BUFFER_BIT, GL_LINEAR);
-	_gBuffer.SetReadTarget(GBUFFER_NORMAL);
+	_gBuffer.SetColorReadTarget(GBUFFER_NORMAL);
 	glBlitFramebuffer(0, 0, 800, 600, HalfWidth, HalfHeight, 800, 600, GL_COLOR_BUFFER_BIT, GL_LINEAR);
-	_gBuffer.SetReadTarget(GBUFFER_UV);
+	_gBuffer.SetColorReadTarget(GBUFFER_UV);
 	glBlitFramebuffer(0, 0, 800, 600, HalfWidth, 0, 800, HalfHeight, GL_COLOR_BUFFER_BIT, GL_LINEAR);
 }

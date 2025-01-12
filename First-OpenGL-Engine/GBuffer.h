@@ -21,7 +21,8 @@ public:
 
 	void BindForWriting();
 	void BindForReading();
-	void SetReadTarget(GBufferType targetType);
+	void SetColorReadTarget(GBufferType targetType, int unit = -1);
+	void SetDepthReadTarget(int unit = -1);
 
 	std::vector<unsigned int> GetAttribTextures() { return _attribTextures; }
 private:

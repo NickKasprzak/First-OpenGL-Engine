@@ -13,7 +13,14 @@ void Texture::Generate(int width, int height, GLenum internalFormat, GLenum form
 	glGenTextures(1, &_ID);
 
 	Bind();
-	glTexImage2D(_target, 0, _internalFormat, _width, _height, 0, _format, _type, data); // pass in 0 if no texture data?
+	if (data == NULL)
+	{
+		glTexImage2D(_target, 0, _internalFormat, _width, _height, 0, _format, _type, NULL);
+	}
+	else
+	{
+		glTexImage2D(_target, 0, _internalFormat, _width, _height, 0, _format, _type, data);
+	}
 	glTexParameteri(_target, GL_TEXTURE_WRAP_S, _wrapMode);
 	glTexParameteri(_target, GL_TEXTURE_WRAP_T, _wrapMode);
 	glTexParameteri(_target, GL_TEXTURE_MIN_FILTER, _minFilter);

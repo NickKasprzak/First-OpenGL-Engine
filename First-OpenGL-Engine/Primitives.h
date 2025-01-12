@@ -23,6 +23,7 @@
 class Cube : public Mesh
 {
 public:
+	// wrong
 	void BuildCube()
 	{
 		std::vector<glm::vec3> positions =
@@ -324,13 +325,13 @@ class Primitives
 public:
 	static void BuildPrimitiveConstants()
 	{
-		cube.BuildCube();
 		MeshLoader meshLoader;
+		cube = meshLoader.LoadMeshFromPath("C:/Users/AquaB/Downloads/Cube/cube.obj");
 		sphere = meshLoader.LoadMeshFromPath("C:/Users/AquaB/Downloads/Sphere/sphere.obj");
 		quad.BuildQuad();
 	}
 
-	static Cube cube;
+	static Mesh cube;
 	static Mesh sphere;
 	static Quad quad;
 };

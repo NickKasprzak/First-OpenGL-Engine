@@ -1,4 +1,3 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (First-Rendering-Engine.vcxproj, OpenGL-SceneGraph.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  RenderTarget.cpp
-C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\RenderTarget.cpp(33,32): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+  DirectionalLight.cpp
   First-OpenGL-Engine.vcxproj -> C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\x64\Debug\First-OpenGL-Engine.exe

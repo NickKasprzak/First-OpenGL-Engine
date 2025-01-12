@@ -34,4 +34,5 @@ void SceneNode::UpdateModelMatrix()
 	model = glm::translate(model, _position);
 	model = glm::scale(model, _scale);
 	//model = glm::rotate(glm::) just dont rotate for now, figure out a way to apply all rotations through quaternions or something
+	_modelMatrix = model;
 }

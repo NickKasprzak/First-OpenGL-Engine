@@ -30,7 +30,15 @@ bool RenderTarget::Initialize(int width, int height, int numColorAttachments, bo
 	}
 
 	// Set draw buffers
-	glDrawBuffers(attachments.size(), attachments.data());
+	if (attachments.empty())
+	{
+		glReadBuffer(GL_NONE);
+		glDrawBuffer(GL_NONE);
+	}
+	else if (attachments.size() != 0)
+	{
+		glDrawBuffers(attachments.size(), attachments.data());
+	}
 
 	// Create depth-stencil buffer if it needs one
 	if (hasDepthStencil)
@@ -38,14 +46,16 @@ bool RenderTarget::Initialize(int width, int height, int numColorAttachments, bo
 		_hasDepthStencil = true;
 
 		Texture dsTexture;
-		dsTexture.SetWrapMode(GL_CLAMP_TO_EDGE);
+		dsTexture.SetWrapMode(GL_REPEAT);
 		dsTexture.SetMinFilter(GL_NEAREST);
 		dsTexture.SetMagFilter(GL_NEAREST);
-		dsTexture.Generate(_width, _height, GL_DEPTH24_STENCIL8, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, false, 0);
+		//dsTexture.Generate(_width, _height, GL_DEPTH24_STENCIL8, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, false, NULL);
+		dsTexture.Generate(_width, _height, GL_DEPTH_COMPONENT, GL_DEPTH_COMPONENT, GL_FLOAT, false, NULL);
 
 		unsigned int dsTextureID = dsTexture.GetID();
 		dsTexture.Bind();
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, dsTextureID, 0);
+		//glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, dsTextureID, 0);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, dsTextureID, 0);
 		dsTexture.Unbind();
 
 		_depthStencilBuffer = dsTexture;
@@ -56,9 +66,11 @@ bool RenderTarget::Initialize(int width, int height, int numColorAttachments, bo
 	if (fboStatus != GL_FRAMEBUFFER_COMPLETE)
 	{
 		std::cout << "Failed to load framebuffer. " << fboStatus << std::endl;
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		return false;
 	}
 
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	return true;
 }
 
@@ -106,7 +118,7 @@ Texture* RenderTarget::GetDepthBuffer()
 	{
 		return &_depthStencilBuffer;
 	}
-	return nullptr;
+	return NULL;
 }
 
 int RenderTarget::GetWidth()

@@ -24,7 +24,7 @@ Mesh testMesh;
 Texture testTexture;
 Material testMaterial;
 std::vector<SceneNode> testRenderables;
-DirectionalLight testDirLight; // set us up
+DirectionalLight testDirLight;
 RenderTarget testRenderTarget;
 std::vector<PointLight> testPointLights;
 
@@ -86,6 +86,13 @@ int ApplicationContext::Initialize()
 	testRenderable.SetMaterial(&testMaterial);
 	testRenderables.push_back(testRenderable);
 
+	SceneNode testRenderable2;
+	testRenderable2.SetMesh(&Primitives::cube);
+	testRenderable2.SetMaterial(&testMaterial);
+	testRenderable2.SetPosition(glm::vec3(0, -2.0f, 0));
+	testRenderable2.SetScale(glm::vec3(5.0f, 0.25f, 5.0f));
+	testRenderables.push_back(testRenderable2);
+
 	PointLight pointLight1;
 	pointLight1.SetPosition(glm::vec3(0, 3, 0));
 	pointLight1.SetIntensity(1);
@@ -97,7 +104,7 @@ int ApplicationContext::Initialize()
 	pointLight2.SetColor(glm::vec3(1.0f, 0.0f, 0.0f));
 	testPointLights.push_back(pointLight2);
 
-	testRenderTarget.Initialize(1024, 1024, 1, true);
+	testRenderTarget.Initialize(1024, 1024, 0, true);
 	testDirLight.SetShadowMap(testRenderTarget);
 
 	// not temp

@@ -34,6 +34,8 @@ void GBuffer::Initialize(int width, int height)
 	*/
 	glBindTexture(GL_TEXTURE_2D, _depthTexture);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32F, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, _depthTexture, 0);
 
 	/*
@@ -81,7 +83,24 @@ void GBuffer::BindForWriting()
 	glViewport(0, 0, _width, _height);
 }
 
-void GBuffer::SetReadTarget(GBufferType type)
+void GBuffer::SetColorReadTarget(GBufferType type, int unit)
 {
 	glReadBuffer(GL_COLOR_ATTACHMENT0 + type);
+
+	if (unit != -1)
+	{
+		glActiveTexture(GL_TEXTURE0 + unit);
+	}
+	glBindTexture(GL_TEXTURE_2D, _attribTextures[type]);
+}
+
+void GBuffer::SetDepthReadTarget(int unit)
+{
+	//glReadBuffer(GL_DEPTH_ATTACHMENT);
+
+	if (unit != -1)
+	{
+		glActiveTexture(GL_TEXTURE0 + unit);
+	}
+	glBindTexture(GL_TEXTURE_2D, _depthTexture);
 }
