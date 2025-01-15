@@ -37,6 +37,7 @@ void Renderer::ProcessRenderCalls()
 	GeometryPass();
 	LightingPass();
 	ShadowPass();
+
 	//DrawGBufferContents();
 	
 
@@ -249,7 +250,6 @@ void Renderer::ShadowPass()
 void Renderer::DirectionalShadowPass()
 {
 	// First pass: Render scene from light's perspective
-	// finally draws the depth map but its all white
 
 	// Bind the directional light's render buffer as the current target
 	RenderTarget* shadowMap = tempDirLight->GetShadowMap();
@@ -262,11 +262,8 @@ void Renderer::DirectionalShadowPass()
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
 
-	// theres some crap going on with how the LVP matrix is calculated thats messing with the way the depth function is calculated
-	// first the values needed to be tweaked, now the circle isnt showing up at all
-
 	// Use and config the shadow map shader
-	Shader* shadowShader = ShaderManager::Instance()->GetShader("DirLightShadowMapPass"); // rename to depth map shader?
+	Shader* shadowShader = ShaderManager::Instance()->GetShader("DirLightShadowMapPass");
 	shadowShader->Use();
 	shadowShader->SetMat4Uniform("LVP", tempDirLight->GetLVPMatrix());
 
@@ -291,10 +288,14 @@ void Renderer::DirectionalShadowPass()
 	glDepthMask(GL_FALSE);
 	glDisable(GL_DEPTH_TEST);
 
-	// Enable blending so we draw over existing fragments with shadows
-	//glEnable(GL_BLEND);
-	//glBlendEquation(GL_FUNC_ADD);
-	//glBlendFunc(GL_ONE, GL_ONE);
+	/*
+	* Enable blending so we draw over existing fragments with shadows
+	* Scales the fragment color returned from shadow shader by the
+	* color already in the buffer, effectively blending the two.
+	*/
+	glEnable(GL_BLEND);
+	glBlendEquation(GL_FUNC_ADD);
+	glBlendFunc(GL_DST_COLOR, GL_ZERO);
 
 	// Config the shadow shader with our depth buffers and other uniforms
 	Shader* shadowDrawShader = ShaderManager::Instance()->GetShader("DirLightShadowDrawPass");
@@ -302,16 +303,19 @@ void Renderer::DirectionalShadowPass()
 	
 	shadowDrawShader->SetVec2Uniform("screenSize", _screenSize);
 	shadowDrawShader->SetMat4Uniform("LVP", tempDirLight->GetLVPMatrix());
+	shadowDrawShader->SetVec3Uniform("lightOffset", tempDirLight->GetOffset());
 
-	// light map buffer isnt being drawn to correctly. values are either 0 or 1 and no where in between.
 	unsigned int lightMapUnit = 0;
 	shadowDrawShader->SetIntUniform("lightShadowMap", lightMapUnit);
 	tempDirLight->GetShadowMap()->GetDepthBuffer()->Bind(lightMapUnit);
-	//_gBuffer.SetDepthReadTarget(0);
 
 	unsigned int positionMapUnit = 1;
 	shadowDrawShader->SetIntUniform("positionBuffer", positionMapUnit);
 	_gBuffer.SetColorReadTarget(GBUFFER_POSITION, positionMapUnit);
+
+	unsigned int normalMapUnit = 2;
+	shadowDrawShader->SetIntUniform("normalBuffer", normalMapUnit);
+	_gBuffer.SetColorReadTarget(GBUFFER_NORMAL, normalMapUnit);
 
 	// Draw a screenspace quad
 	glm::mat4 identity = glm::mat4(1.0f);
@@ -324,6 +328,7 @@ void Renderer::DirectionalShadowPass()
 	// to their defaults
 	glDepthMask(GL_TRUE);
 	glEnable(GL_DEPTH_TEST);
+	glBlendFunc(GL_ZERO, GL_ZERO);
 	glDisable(GL_BLEND);
 }
 

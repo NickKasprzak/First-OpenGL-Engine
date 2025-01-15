@@ -12,6 +12,11 @@ glm::vec3 DirectionalLight::GetDirection()
 	return _direction;
 }
 
+glm::vec3 DirectionalLight::GetOffset()
+{
+	return _frustumOffset;
+}
+
 RenderTarget* DirectionalLight::GetShadowMap()
 {
 	return &_shadowMap;
@@ -40,7 +45,7 @@ void DirectionalLight::SetShadowMap(RenderTarget shadowMap)
 
 void DirectionalLight::SetLVPFrustum(float offset, glm::vec4 size, float nearClip, float farClip)
 {
-	_frustumOffset = offset;
+	_frustumOffset = offset * glm::normalize(-_direction);
 	_frustumSize = size;
 	_frustumNearClip = nearClip;
 	_frustumFarClip = farClip;
@@ -49,10 +54,7 @@ void DirectionalLight::SetLVPFrustum(float offset, glm::vec4 size, float nearCli
 
 void DirectionalLight::_updateLVPMatrix()
 {
-	// still wrong. direction looks inversed.
-	// does negating it fix?
-	glm::vec3 offset = _frustumOffset * glm::normalize(-_direction);
-	glm::mat4 view = glm::lookAt(offset, glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	glm::mat4 view = glm::lookAt(_frustumOffset, glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	glm::mat4 proj = glm::ortho(-_frustumSize.x, _frustumSize.y, -_frustumSize.z, _frustumSize.w, _frustumNearClip, _frustumFarClip);
 	_LVPMatrix = proj * view;
 }

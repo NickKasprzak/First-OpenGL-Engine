@@ -7,11 +7,12 @@
 class DirectionalLight
 {
 public:
-	DirectionalLight() { _updateLVPMatrix(); }
+	DirectionalLight() { SetLVPFrustum(5.0f, glm::vec4(20.0f), 0.1f, 10.0f); }
 	~DirectionalLight() = default;
 
 	glm::vec3 GetColor();
 	glm::vec3 GetDirection();
+	glm::vec3 GetOffset();
 	// Replace with reference later
 	RenderTarget* GetShadowMap();
 	glm::mat4 GetLVPMatrix();
@@ -30,7 +31,7 @@ private:
 	
 	// LVP frustum stuff
 	// dump all this stuff into a seperate class?
-	float _frustumOffset = 5.0f;
+	glm::vec3 _frustumOffset = glm::vec3(1.0f);
 	glm::vec4 _frustumSize = glm::vec4(20.0f, 20.0f, 20.0f, 20.0f);
 	float _frustumNearClip = 0.1f;
 	float _frustumFarClip = 10.0f;

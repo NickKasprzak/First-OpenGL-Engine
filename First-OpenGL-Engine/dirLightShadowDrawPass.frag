@@ -3,11 +3,13 @@ out vec4 FragColor;
 
 uniform sampler2D lightShadowMap;
 uniform sampler2D positionBuffer;
+uniform sampler2D normalBuffer;
 
 uniform vec2 screenSize;
 uniform mat4 LVP;
+uniform vec3 lightOffset;
 
-float calcShadow(vec4 fragPosLightSpace)
+float calcShadow(vec4 fragPosLightSpace, float fragLightDot)
 {
 	// Perspective divide to NDC using the w coordinate
 	// supplied to the fragPos from the LVP.
@@ -29,6 +31,14 @@ float calcShadow(vec4 fragPosLightSpace)
 	// from the light in light space.
 	float currentDepth = projCoords.z;
 
+	// Calculate a bias that scales based on how steep the
+	// surface of the fragment is relative to the light based
+	// on their resulting dot product to smooth out the current
+	// depth.
+	float bias = max(0.05 * (1.0 - fragLightDot), 0.005);
+	currentDepth = currentDepth - bias;
+	//currentDepth = currentDepth - 0.005;
+
 	// If the closest depth is higher than the current 
 	// depth, something is blocking light from hitting
 	// the fragment's position and is considered in
@@ -49,19 +59,25 @@ void main()
 	// Convert the fragment's position to lightspace
 	vec3 fragPos = vec3(texture(positionBuffer, texel));
 	vec4 fragPosLightSpace = LVP * vec4(fragPos, 1.0f);
+
+	// Get the dot product between the fragment's normal 
+	// and the direction to the light to see how much they
+	// point in the same direction
+	vec3 fragNormal = vec3(texture(normalBuffer, texel));
+	fragNormal = normalize(fragNormal);
+	vec3 lightDir = normalize(lightOffset - fragPos);
+	float fragToLightDot = dot(fragNormal, lightDir);
 	
 	// Get the shadow value for the given fragment
-	float shadow = calcShadow(fragPosLightSpace);
+	float shadow = calcShadow(fragPosLightSpace, fragToLightDot);
 
 	// If the fragment isn't in shadow, cull the
 	// fragment.
 	if (shadow == 0)
 	{ 
 		discard;
-		//FragColor = vec4(1.0f, 1.0f, 1.0f, 1.0f);
-		//return;
 	}
 
 	// Otherwise return the shadow's color
-	FragColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+	FragColor = vec4(vec3(1 - shadow), 1.0f);
 }

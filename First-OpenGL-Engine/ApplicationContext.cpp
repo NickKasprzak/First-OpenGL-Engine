@@ -73,7 +73,7 @@ int ApplicationContext::Initialize()
 	// temp obj
 	MeshLoader meshLoader;
 	testMesh = meshLoader.LoadMeshFromPath("C:/Users/AquaB/Downloads/Sphere/sphere.obj");
-	//testMesh = Primitives::cube;
+	//testMesh = meshLoader.LoadMeshFromPath("C:/Users/AquaB/Downloads/Cube/cube.obj");
 
 	TextureLoader textureLoader;
 	testTexture = textureLoader.LoadTextureFromPath("C:/Users/AquaB/Downloads/OldSky.png");

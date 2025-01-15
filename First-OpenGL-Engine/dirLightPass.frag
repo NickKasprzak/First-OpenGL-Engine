@@ -27,7 +27,8 @@ vec4 calcDirectionalLight(vec3 normal, vec3 viewDir)
 	vec3 diffuseLight = lightColor * diffuseFactor;
 	vec3 specularLight = vec3(1.0f) * specularFactor;
 	
-	return vec4(ambientLight + diffuseLight + specularLight, 1.0f);
+	//return vec4(ambientLight + diffuseLight + specularLight, 1.0f);
+	return vec4(diffuseLight + specularLight, 1.0f);
 }
 
 void main()
