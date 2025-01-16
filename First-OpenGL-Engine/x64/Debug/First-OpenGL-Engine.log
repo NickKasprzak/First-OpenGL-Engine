@@ -3,24 +3,16 @@
 C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Time.h(12,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   (compiling source file 'Renderer.cpp')
   
-C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(119,45): warning C4244: 'argument': conversion from 'T' to 'GLsizei', possible loss of data
-C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(119,45): warning C4244:         with
-C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(119,45): warning C4244:         [
-C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(119,45): warning C4244:             T=float
-C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(119,45): warning C4244:         ]
-C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(119,30): warning C4244: 'argument': conversion from 'T' to 'GLsizei', possible loss of data
-C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(119,30): warning C4244:         with
-C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(119,30): warning C4244:         [
-C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(119,30): warning C4244:             T=float
-C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(119,30): warning C4244:         ]
-C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(285,45): warning C4244: 'argument': conversion from 'T' to 'GLsizei', possible loss of data
-C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(285,45): warning C4244:         with
-C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(285,45): warning C4244:         [
-C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(285,45): warning C4244:             T=float
-C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(285,45): warning C4244:         ]
-C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(285,30): warning C4244: 'argument': conversion from 'T' to 'GLsizei', possible loss of data
-C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(285,30): warning C4244:         with
-C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(285,30): warning C4244:         [
-C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(285,30): warning C4244:             T=float
-C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(285,30): warning C4244:         ]
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(118,45): warning C4244: 'argument': conversion from 'T' to 'GLsizei', possible loss of data
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(118,45): warning C4244:         with
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(118,45): warning C4244:         [
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(118,45): warning C4244:             T=float
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(118,45): warning C4244:         ]
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(118,30): warning C4244: 'argument': conversion from 'T' to 'GLsizei', possible loss of data
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(118,30): warning C4244:         with
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(118,30): warning C4244:         [
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(118,30): warning C4244:             T=float
+C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\First-OpenGL-Engine\Renderer.cpp(118,30): warning C4244:         ]
+  ShaderManager.cpp
+  Generating Code...
   First-OpenGL-Engine.vcxproj -> C:\Users\AquaB\Documents\Projects\First-OpenGL-Engine\x64\Debug\First-OpenGL-Engine.exe

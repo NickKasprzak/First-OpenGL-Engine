@@ -63,7 +63,6 @@
     <None Include="dirLightShadowMapPass.vert" />
     <None Include="dirLightShadowMapPass.frag" />
     <None Include="shadowDrawPass.vert" />
-    <None Include="dirLightShadowDrawPass.frag" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="external">

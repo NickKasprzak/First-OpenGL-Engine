@@ -36,6 +36,7 @@ public:
 	*/
 	GBuffer _gBuffer;
 private:
+	void AmbientLightPass();
 	void DirectionalLightPass();
 	void PointLightPass();
 	void SpotlightPass();

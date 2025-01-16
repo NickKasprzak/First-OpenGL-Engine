@@ -35,9 +35,8 @@ void Renderer::ClearRenderBuffer()
 void Renderer::ProcessRenderCalls()
 {
 	GeometryPass();
-	LightingPass();
 	ShadowPass();
-
+	LightingPass();
 	//DrawGBufferContents();
 	
 
@@ -181,6 +180,12 @@ void Renderer::DirectionalLightPass()
 	// Set light uniforms
 	dirLightShader->SetVec3Uniform("lightColor", tempDirLight->GetColor());
 	dirLightShader->SetVec3Uniform("lightDirection", tempDirLight->GetDirection());
+	dirLightShader->SetMat4Uniform("lightSpaceTransform", tempDirLight->GetLVPMatrix());
+	dirLightShader->SetVec3Uniform("lightOffset", tempDirLight->GetOffset());
+
+	unsigned int lightMapUnit = 5;
+	dirLightShader->SetIntUniform("lightShadowMap", lightMapUnit);
+	tempDirLight->GetShadowMap()->GetDepthBuffer()->Bind(lightMapUnit);
 
 	// Set other uniforms
 	dirLightShader->SetVec3Uniform("viewPosition", _camera->GetPosition());
@@ -249,8 +254,6 @@ void Renderer::ShadowPass()
 
 void Renderer::DirectionalShadowPass()
 {
-	// First pass: Render scene from light's perspective
-
 	// Bind the directional light's render buffer as the current target
 	RenderTarget* shadowMap = tempDirLight->GetShadowMap();
 	glBindFramebuffer(GL_FRAMEBUFFER, shadowMap->GetID());
@@ -267,69 +270,12 @@ void Renderer::DirectionalShadowPass()
 	shadowShader->Use();
 	shadowShader->SetMat4Uniform("LVP", tempDirLight->GetLVPMatrix());
 
-	// Draw scene
+	// Draw scene to the light's shadow map
 	for (int i = 0; i < tempNodes.size(); i++)
 	{
 		shadowShader->SetMat4Uniform("model", tempNodes[i]->_modelMatrix);
 		tempNodes[i]->_mesh->Draw();
 	}
-
-	/*
-	* Second pass: Render shadows based on depths present in light's
-	* shadow map and the depth buffer in the GBuffer
-	*/
-
-	// Bind the default framebuffer as the current draw target
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glClear(GL_DEPTH_BUFFER_BIT);
-	glViewport(0, 0, _screenSize.x, _screenSize.y);
-
-	// Disable the depth mask and depth testing
-	glDepthMask(GL_FALSE);
-	glDisable(GL_DEPTH_TEST);
-
-	/*
-	* Enable blending so we draw over existing fragments with shadows
-	* Scales the fragment color returned from shadow shader by the
-	* color already in the buffer, effectively blending the two.
-	*/
-	glEnable(GL_BLEND);
-	glBlendEquation(GL_FUNC_ADD);
-	glBlendFunc(GL_DST_COLOR, GL_ZERO);
-
-	// Config the shadow shader with our depth buffers and other uniforms
-	Shader* shadowDrawShader = ShaderManager::Instance()->GetShader("DirLightShadowDrawPass");
-	shadowDrawShader->Use();
-	
-	shadowDrawShader->SetVec2Uniform("screenSize", _screenSize);
-	shadowDrawShader->SetMat4Uniform("LVP", tempDirLight->GetLVPMatrix());
-	shadowDrawShader->SetVec3Uniform("lightOffset", tempDirLight->GetOffset());
-
-	unsigned int lightMapUnit = 0;
-	shadowDrawShader->SetIntUniform("lightShadowMap", lightMapUnit);
-	tempDirLight->GetShadowMap()->GetDepthBuffer()->Bind(lightMapUnit);
-
-	unsigned int positionMapUnit = 1;
-	shadowDrawShader->SetIntUniform("positionBuffer", positionMapUnit);
-	_gBuffer.SetColorReadTarget(GBUFFER_POSITION, positionMapUnit);
-
-	unsigned int normalMapUnit = 2;
-	shadowDrawShader->SetIntUniform("normalBuffer", normalMapUnit);
-	_gBuffer.SetColorReadTarget(GBUFFER_NORMAL, normalMapUnit);
-
-	// Draw a screenspace quad
-	glm::mat4 identity = glm::mat4(1.0f);
-	shadowDrawShader->SetMat4Uniform("model", identity);
-	shadowDrawShader->SetMat4Uniform("view", identity);
-	shadowDrawShader->SetMat4Uniform("projection", identity);
-	Primitives::quad.Draw();
-
-	// Revert blend and depth funcs back
-	// to their defaults
-	glDepthMask(GL_TRUE);
-	glEnable(GL_DEPTH_TEST);
-	glBlendFunc(GL_ZERO, GL_ZERO);
-	glDisable(GL_BLEND);
 }
 
 void Renderer::DrawGBufferContents()
